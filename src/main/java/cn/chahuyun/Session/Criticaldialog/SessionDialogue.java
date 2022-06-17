@@ -1,10 +1,7 @@
 package cn.chahuyun.Session.Criticaldialog;
 
 import cn.chahuyun.data.SessionDataBase;
-import cn.chahuyun.file.SessionData;
 import net.mamoe.mirai.event.events.MessageEvent;
-
-import java.util.ArrayList;
 
 /**
  * SessionDialogue
@@ -23,7 +20,6 @@ public class SessionDialogue {
      * @date 2022/6/16 15:17
      */
     public static void session(MessageEvent messageEvent,SessionDataBase sessionDataBase) {
-        ArrayList<SessionDataBase> session = (ArrayList<SessionDataBase>) SessionData.INSTANCE.getSession();
         //type = 0 为string类回复
         if (sessionDataBase.getType() == 0) {
             messageEvent.getSubject().sendMessage(sessionDataBase.getValue());

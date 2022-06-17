@@ -2,8 +2,8 @@ package cn.chahuyun.file;
 
 import cn.chahuyun.data.SessionDataBase;
 import cn.chahuyun.enumerate.DataEnum;
-import net.mamoe.mirai.console.data.AutoSavePluginData;
-import net.mamoe.mirai.message.data.MessageChain;
+import net.mamoe.mirai.console.data.Value;
+import net.mamoe.mirai.console.data.java.JavaAutoSavePluginData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @description
  * @date 2022/6/16 14:25
  */
-public class SessionData extends AutoSavePluginData {
+public class SessionData extends JavaAutoSavePluginData{
 
     /**
      * 唯一构造
@@ -30,30 +30,19 @@ public class SessionData extends AutoSavePluginData {
         super("SessionData");
     }
 
+    public final Value<String> string = value("测试","值");
+
     /**
      * list<SessionDataBase> 对话数据集合
      */
-    private List<SessionDataBase> session;
+    public final Value<List<SessionDataBase>> sessionList = typedValue(
+            "sessionList",
+            createKType(List.class, createKType(SessionDataBase.class)),
+            new ArrayList<SessionDataBase>(){
+                        {
+                            add(new SessionDataBase("乒", 0, "乓", null, DataEnum.ACCURATE));
+                        }
+                }
+            );
 
-    /**
-     * @description 添加对话数据方法
-     * @author zhangjiaxing
-     * @param key 触发词
-     * @param type 触发类型 0-string回复 1-其他回复
-     * @param value string回复词
-     * @param messageChain 其他回复所有类
-     * @param dataEnum 匹配类型
-     * @date 2022/6/16 21:12
-     */
-    public void add(String key, int type, String value, MessageChain messageChain, DataEnum dataEnum) {
-        session.add(new SessionDataBase(key, type, value, messageChain, dataEnum));
-    }
-
-    public List<SessionDataBase> getSession() {
-        return session;
-    }
-
-    public void setSession(ArrayList<SessionDataBase> session) {
-        this.session = session;
-    }
 }

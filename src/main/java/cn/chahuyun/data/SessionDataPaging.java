@@ -5,9 +5,6 @@ import cn.chahuyun.GroupSession;
 import net.mamoe.mirai.utils.MiraiLogger;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static cn.chahuyun.GroupSession.sessionData;
 /**
  * 说明
  *
@@ -19,7 +16,7 @@ public class SessionDataPaging {
 
     private static MiraiLogger l = GroupSession.INSTANCE.getLogger();
 
-    private ArrayList<SessionDataBase> sessionPattern = (ArrayList<SessionDataBase>) sessionData.getSession();
+//    private ArrayList<SessionDataBase> sessionPattern = (ArrayList<SessionDataBase>) sessionData.getSession();
 
 
     /**
@@ -66,7 +63,7 @@ public class SessionDataPaging {
                 toIndex = total;
             }
             //截取list，从该页的位置数截取起
-            subList = (ArrayList<SessionDataBase>) list.subList(pageSize * (currentPage - 1), toIndex);
+            subList = new ArrayList<SessionDataBase>(list.subList(pageSize * (currentPage - 1), toIndex));
         }else {
             subList = list;
         }

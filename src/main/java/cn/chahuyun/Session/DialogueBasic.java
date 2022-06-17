@@ -5,6 +5,7 @@ import cn.chahuyun.Session.Criticaldialog.PuDialogue;
 import cn.chahuyun.Session.Criticaldialog.SessionDialogue;
 import cn.chahuyun.data.SessionDataBase;
 import cn.chahuyun.enumerate.MessEnum;
+import cn.chahuyun.file.SessionData;
 import lombok.Data;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.utils.MiraiLogger;
@@ -54,7 +55,7 @@ public class DialogueBasic {
         判断是否是对话类消息
          */
         //获取对话数据
-        ArrayList<SessionDataBase> sessionPattern = (ArrayList<SessionDataBase>) sessionData.getSession();
+        ArrayList<SessionDataBase> sessionPattern = (ArrayList<SessionDataBase>) sessionData.sessionList.get();
         //创建触发对话结果
         SessionDataBase sessionDataBase = null;
         //循环判断

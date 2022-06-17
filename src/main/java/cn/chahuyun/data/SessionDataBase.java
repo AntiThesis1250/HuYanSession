@@ -3,6 +3,8 @@ package cn.chahuyun.data;
 import cn.chahuyun.enumerate.DataEnum;
 import net.mamoe.mirai.message.data.MessageChain;
 
+import java.io.Serializable;
+
 /**
  * SessionData
  *
@@ -10,7 +12,7 @@ import net.mamoe.mirai.message.data.MessageChain;
  * @description 会话数据
  * @date 2022/6/16 10:30
  */
-public class SessionDataBase{
+public class SessionDataBase implements Serializable {
     /**
      * 触发关键词
      */

@@ -2,17 +2,13 @@ package cn.chahuyun;
 
 import cn.chahuyun.Session.DialogueBasic;
 import cn.chahuyun.command.CommandManage;
-import cn.chahuyun.data.SessionDataBase;
-import cn.chahuyun.enumerate.DataEnum;
 import cn.chahuyun.file.SessionData;
+import cn.chahuyun.utils.ContinuousInputSession;
 import net.mamoe.mirai.console.command.CommandManager;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.EventChannel;
-import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.MessageEvent;
-
-import java.util.ArrayList;
 
 
 /**
@@ -45,25 +41,15 @@ public final class GroupSession extends JavaPlugin {
         getLogger().info("Group Session Console 加载!");
 
         //加载数据
-        sessionData = SessionData.INSTANCE;
-        this.reloadPluginData(sessionData);
+        this.reloadPluginData(SessionData.INSTANCE);
         getLogger().info("SessionData 已加载！");
-        if (sessionData.getSession() == null) {
-            sessionData.setSession(new ArrayList<SessionDataBase>(){
-                {
-                    add(new SessionDataBase("乒", 0, "乓", null, DataEnum.ACCURATE));
-                }
-            });
-        }
-
+//        sessionData = SessionData.INSTANCE;
 
         //注册指令
         CommandManager.INSTANCE.registerCommand(new CommandManage(GroupSession.INSTANCE), true);
 
-        //消息监听器 监听 2061954151 的所有消息
-        EventChannel<MessageEvent> messageEvent = GlobalEventChannel.INSTANCE.filterIsInstance(MessageEvent.class)
-                .filter(event -> event.getBot().getId() == 2061954151L);
 
+        EventChannel<MessageEvent> messageEvent = ContinuousInputSession.getMessageEvent();
 
 
         //监听消息
